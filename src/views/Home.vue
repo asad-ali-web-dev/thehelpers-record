@@ -30,20 +30,28 @@ function getWithExpiry(key) {
 }
 
 function createRecord() {
-  store.dispatch('CREATE_DONEE_RECORD', {
-    recipient_name: name.value,
-    recipient_contact: contact.value,
-    recipient_id: store.getters.GET_RECIPIENT_ID_CARD
-  })
-  .then(() => {
-    alert("Data Uploaded Successfully! \nInput feilds will be cleared", name.value, contact.value);
-    name.value = "";
-    contact.value = "";
-    recipient_id.value = [];
-  })
-  .catch(e => {
-    console.error(e);
-  })
+  if (name.value !== "" || contact.value !== "") {
+    store.dispatch('CREATE_DONEE_RECORD', {
+      recipient_name: name.value,
+      recipient_contact: contact.value,
+      recipient_id: store.getters.GET_RECIPIENT_ID_CARD
+    })
+    .then(() => {
+      if(alert("Data Uploaded Successfully! \nInput feilds will be cleared", name.value, contact.value)){}
+      else { window.location.reload();  }
+      name.value = "";
+      contact.value = "";
+      recipient_id.value = [];
+      window.location.href = window.location.href;
+    })
+    .catch(e => {
+      console.error(e);
+      window.location.href = window.location.href;
+    })
+  } else {
+    if(alert("Oops! Feilds cannot be empty")){}
+    else { window.location.reload();  }
+  }
 }
 </script>
 
