@@ -7,6 +7,16 @@ import router from '../router'
 const name = ref("");
 const contact = ref("");
 
+const disabled = ref(true);
+
+setInterval(() => {
+  if (name.value !== "" || contact.value != "") {
+    disabled.value = false;
+  } else {
+    disabled.value = true;
+  }
+}, 100);
+
 if (!getWithExpiry("logged_in")) {
   router.push("/login");
 }
@@ -81,9 +91,9 @@ function createRecord() {
           <th-file-vue></th-file-vue>
         </div>
 
-        <div class="buttons">
+        <div class="buttons" :class="{ 'disable-style': disabled }">
 
-          <button @click.prevent="createRecord" class="blob-btn">
+          <button @click.prevent="createRecord" class="blob-btn" :class="{'disable-cursor': disabled}" :disabled="disabled">
             SUBMIT
             
             <span class="blob-btn__inner">
@@ -120,6 +130,14 @@ function createRecord() {
 </template>
 
 <style>
+
+.disable-style {
+  opacity: .4;
+}
+
+.disable-cursor {
+  cursor: not-allowed !important;
+}
 
 .th-form-size {
   width: 35rem;
