@@ -37,16 +37,15 @@ function createRecord() {
       recipient_id: store.getters.GET_RECIPIENT_ID_CARD
     })
     .then(() => {
-      if(alert("Data Uploaded Successfully! \nInput feilds will be cleared", name.value, contact.value)){}
-      else { window.location.reload();  }
-      name.value = "";
-      contact.value = "";
-      recipient_id.value = [];
-      window.location.href = window.location.href;
+      setTimeout(() => {
+        if(alert("Data Uploaded Successfully! \nInput feilds will be cleared")){}
+        else { window.location.reload();  }
+        name.value = "";
+        contact.value = "";
+      }, 3000);
     })
     .catch(e => {
       console.error(e);
-      window.location.href = window.location.href;
     })
   } else {
     if(alert("Oops! Feilds cannot be empty")){}
