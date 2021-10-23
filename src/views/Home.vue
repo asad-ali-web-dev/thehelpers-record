@@ -87,7 +87,7 @@ function createRecord() {
           <label for="recipient-contact">Recipient Contact</label>
         </div>
 
-        <div class="w-100" style="cursor: pointer;">
+        <div class="w-100" style="cursor: pointer;" v-show="!disabled">
           <th-file-vue></th-file-vue>
         </div>
 
